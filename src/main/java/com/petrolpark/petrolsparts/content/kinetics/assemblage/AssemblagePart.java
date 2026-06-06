@@ -6,21 +6,27 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.petrolpark.compat.create.core.block.CreateMultiPartBlock;
 import com.petrolpark.core.world.block.multiPart.MultiPartBlock;
 import com.petrolpark.petrolsparts.PetrolsParts;
 import com.petrolpark.petrolsparts.PetrolsPartsShapes;
 
+import com.simibubi.create.content.schematics.requirement.ItemRequirement;
 import net.createmod.catnip.math.VoxelShaper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class AssemblagePart implements MultiPartBlock.IPart {
+public class AssemblagePart implements MultiPartBlock.IPart, CreateMultiPartBlock.ICreatePart {
 
     public static final VoxelShaper SHAFT_HALF_SHAPER = PetrolsPartsShapes.shape(5, 8, 5, 11, 16, 11).forDirectional();
     public static final VoxelShaper COGWHEEL_SHAPER = PetrolsPartsShapes.shape(2, 12, 2, 14, 16, 14).forDirectional();
@@ -63,6 +69,11 @@ public class AssemblagePart implements MultiPartBlock.IPart {
     };
 
     @Override
+    public ItemStack cloneItemStack(BlockState blockState, LevelReader levelReader, BlockPos blockPos, Player player) {
+        return null;
+    }
+
+    @Override
     public VoxelShape shape() {
         return shape;
     };
@@ -71,5 +82,10 @@ public class AssemblagePart implements MultiPartBlock.IPart {
     public ResourceKey<LootTable> loot() {
         return loot;
     };
-    
+
+    @Override
+    public ItemRequirement itemRequirement() {
+        return null;
+    }
+
 };

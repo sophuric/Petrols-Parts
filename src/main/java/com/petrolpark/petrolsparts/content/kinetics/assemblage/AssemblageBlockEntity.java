@@ -111,7 +111,14 @@ public class AssemblageBlockEntity extends CompositeKineticBlockEntity {
         public boolean areStatesKineticallyEquivalent(BlockState oldState, BlockState state) {
             for (Property<?> property : trackedProperties) if (oldState.getValue(property) != state.getValue(property)) return false;
             return true;
-        };
+        }
+
+        @Override
+        public int getIndex() {
+            return 0;
+        }
+
+        ;
 
     };
     
